@@ -13,7 +13,7 @@
 
 ## Developer Mode and command launch
 
-SDB connectivity and an unrestricted interactive shell are distinct capabilities. Samsung's [testing FAQ](https://developer.samsung.com/smarttv/develop/faq/application-testing.html) describes restrictions on SDB access. This controller stages its own scripts through SDB file transfer and starts them through the app-install command path used by the tested G80SD. That path may vary by firmware; `doctor` checks it and the media components on the selected display. Command replies use a separate local TCP port (26471 by default), so status and stop remain available while OBS owns the video port.
+SDB connectivity and an unrestricted interactive shell are distinct capabilities. Samsung's [testing FAQ](https://developer.samsung.com/smarttv/develop/faq/application-testing.html) describes restrictions on SDB access. This controller stages its own scripts through SDB file transfer and starts them using the [app-install command injection documented by Bishop Fox](https://bishopfox.com/blog/samsung-tizen-os-version-through-9-0) (SVE-2025-50109). The tested G80SD accepts this path despite rejecting an ordinary SDB shell. A firmware fix could close it; `doctor` checks the launch path and media components on the selected display. Command replies use a separate local TCP port (26471 by default), so status and stop remain available while OBS owns the video port.
 
 This project supplies its own controller and media helper. It does not supply vendor firmware, vendor libraries, credentials, or device keys. Native media libraries and, for high mode, .NET 6 must already be present on the display.
 
