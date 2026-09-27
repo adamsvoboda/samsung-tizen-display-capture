@@ -1,0 +1,16 @@
+{
+  "monitor_ip": "YOUR_MONITOR_IP",
+  "receiver_ip": "YOUR_COMPUTER_IP",
+  "port": 26470,
+  "control_port": 26471,
+  "sdb_target": "YOUR_MONITOR_IP:26101",
+  "sdb_path": "sdb",
+  "sdb_ssh_host": null,
+  "quality_mode": "standard",
+  "video_bitrate_mbps": 8,
+  "audio_source": "tizenaudio-sink.monitor",
+  "resolution": "1920x1080",
+  "fps": 60,
+  "audio_enabled": true,
+  "audio_bitrate_kbps": 192
+}

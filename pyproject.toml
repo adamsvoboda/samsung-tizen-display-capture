@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "samsung-tizen-obs-input"
+version = "0.3.0"
+description = "Send a supported Samsung Tizen display input to OBS or another MPEG-TS player"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [{name = "Contributors"}]
+keywords = ["OBS", "Samsung", "Tizen", "HDMI", "MPEG-TS"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+]
+
+[project.scripts]
+tizen-obs = "samsung_tizen_obs_input.cli:main"
+
+[tool.setuptools.package-data]
+samsung_tizen_obs_input = ["stream.sh", "bin/*.dll", "bin/*.json"]
