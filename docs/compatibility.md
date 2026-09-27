@@ -17,6 +17,14 @@ SDB connectivity and an unrestricted interactive shell are distinct capabilities
 
 This project supplies its own controller and media helper. It does not supply vendor firmware, vendor libraries, credentials, or device keys. Native media libraries and, for high mode, .NET 6 must already be present on the display.
 
+## If the command injection is patched
+
+The injection is a command launcher, not part of the GStreamer capture or MPEG-TS stream. The current controller uses it each time it creates the remote work directory or runs `check`, `start`, `stop`, `status`, `logs`, or `sample`. SDB file transfer alone can stage the scripts but cannot run them. A stream that is already running does not need the injection for each video frame, but the controller needs a working launcher for later commands and restarts.
+
+On a display that permits ordinary `sdb shell` commands, the host bridge could replace its injection call with a direct shell invocation of the staged command script while retaining the media pipeline and control reply path. This requires testing that the shell account can access the same media components. It is not a fallback on the tested G80SD: ordinary shell requests are rejected there, consistent with [Samsung's note that TV devices lack SDB shell support](https://developer.samsung.com/tizen/blog/en/2020/07/20/installing-net-diagnostic-tools-on-tizen-devices).
+
+Another device-specific command channel, such as separately available shell access, could run the same script if it has the required permissions. A packaged TV application would require separate investigation: Samsung's [TV app documentation](https://developer.samsung.com/smarttv/develop/faq/other-features.html) says application screen capture is unsupported, so a standard app is not a demonstrated replacement for this native pipeline. No alternate launcher has been implemented or verified for this project. If `doctor` fails after a firmware update, SDB connectivity or a successful file push alone does not establish that capture can be started.
+
 ## Resolution and bandwidth
 
 The installed capture plugins report a 1920×1080 destination ceiling. A 4K display or input signal does not establish 4K encoding support. There is no demonstrated 1440p/4K capture route in this project.
